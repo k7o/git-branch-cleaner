@@ -50,14 +50,14 @@ func getDefaultBranch() (string, error) {
 	if err == nil {
 		defaultBranch := strings.TrimSpace(string(output))
 		defaultBranch = strings.TrimPrefix(defaultBranch, "refs/remotes/origin/")
-		
+
 		// Verify the branch exists locally
 		if branchExists(defaultBranch) {
 			return defaultBranch, nil
 		}
 		// Note: Remote HEAD points to a branch that doesn't exist locally, falling back
 	}
-	
+
 	// Fall back to checking common default branch names
 	branches := []string{"main", "master"}
 	for _, branch := range branches {
