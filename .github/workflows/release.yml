@@ -26,8 +26,16 @@ jobs:
             go build -trimpath -ldflags="-s -w" \
             -o git-branch-cleaner-linux-amd64 .
 
+      - name: Build (windows/amd64)
+        run: |
+          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 \
+            go build -trimpath -ldflags="-s -w" \
+            -o git-branch-cleaner-windows-amd64.exe .
+
       - name: Create release and attach binary
         uses: softprops/action-gh-release@v2
         with:
-          files: git-branch-cleaner-linux-amd64
+          files: |
+            git-branch-cleaner-linux-amd64
+            git-branch-cleaner-windows-amd64.exe
           generate_release_notes: true
